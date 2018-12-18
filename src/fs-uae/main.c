@@ -364,6 +364,9 @@ static void event_handler(int line)
          * connected to the server (for net play game), but aborted connection
          * before game started. */
         fs_uae_reconfigure_input_ports_amiga();
+        /* Also configure input ports now (which also makes sure keyboard
+         * etc. is initialized) to ensure it is configured at least once. */
+        fs_uae_reconfigure_input_ports_host();
     }
 
     if (fs_emu_is_quitting()) {
@@ -733,7 +736,7 @@ static void log_to_libfsemu(const char *message)
         ignore = fs_config_false(OPTION_UAELOG);
     }
     if (!ignore) {
-        //fs_log_string(message);
+        fs_log_string(message);
     }
 }
 
